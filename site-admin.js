@@ -4,6 +4,17 @@
   var STORAGE_KEY = "hne-site-admin-content-v1";
   var LAST_SITE_KEY = "hne-site-admin-last-site";
   var DEFAULT_CONTENT = window.HNE_SITE_CONTENT || { version: 1, sites: {} };
+  var firebaseConfig = DEFAULT_CONTENT.firebase || {};
+  var remoteContent = null;
+  var firebaseState = {
+    ready: false,
+    db: null,
+    auth: null,
+    storage: null,
+    docRef: null,
+    user: null,
+    adminReady: false
+  };
 
   var PAGE_CONFIG = {
     aularitmica: {
@@ -20,9 +31,7 @@
         heroBg: '[data-template-id="hero-bg"]',
         heroPhoto: '[data-template-id="hero-profile"]',
         aboutPhoto: '[data-template-id="about-photo"]'
-      },
-      galleryStyle: "aularitmica",
-      videoStyle: "aularitmica"
+      }
     },
     motorista: {
       files: ["indexinstru"],
@@ -38,9 +47,7 @@
         heroBg: '[data-template-id="hero-bg"]',
         heroPhoto: '[data-template-id="hero-portrait"]',
         aboutPhoto: '[data-template-id="about-photo"]'
-      },
-      galleryStyle: "motorista",
-      videoStyle: "motorista"
+      }
     },
     show: {
       files: ["indexshow"],
@@ -52,9 +59,7 @@
       },
       images: {
         heroBg: ".hero"
-      },
-      galleryStyle: "show",
-      videoStyle: "show"
+      }
     }
   };
 
@@ -87,13 +92,22 @@
   }
 
   function getContent() {
-    return merge(DEFAULT_CONTENT, getStoredContent());
+    return merge(merge(DEFAULT_CONTENT, getStoredContent()), remoteContent);
   }
 
-  function saveContent(content) {
+  function saveLocalContent(content) {
     var next = merge(DEFAULT_CONTENT, content);
     next.updatedAt = new Date().toISOString();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    return next;
+  }
+
+  async function saveContent(content) {
+    var next = saveLocalContent(content);
+    if (firebaseState.docRef) {
+      await firebaseState.docRef.set(next);
+      remoteContent = next;
+    }
     return next;
   }
 
@@ -334,6 +348,92 @@
     return false;
   }
 
+  function getFirebasePath() {
+    return {
+      collection: firebaseConfig.collection || "hne_site",
+      document: firebaseConfig.document || "content"
+    };
+  }
+
+  function setupFirebase() {
+    if (!firebaseConfig.enabled || !firebaseConfig.config || !window.firebase) return false;
+    try {
+      if (!window.firebase.apps.length) {
+        window.firebase.initializeApp(firebaseConfig.config);
+      }
+      firebaseState.auth = window.firebase.auth();
+      firebaseState.db = window.firebase.firestore();
+      firebaseState.storage = window.firebase.storage ? window.firebase.storage() : null;
+      var path = getFirebasePath();
+      firebaseState.docRef = firebaseState.db.collection(path.collection).doc(path.document);
+      firebaseState.ready = true;
+      return true;
+    } catch (error) {
+      console.warn("Firebase indisponível:", error);
+      return false;
+    }
+  }
+
+  function watchRemoteContent(onChange) {
+    if (!firebaseState.docRef) return;
+    firebaseState.docRef.onSnapshot(function (snapshot) {
+      if (snapshot.exists) {
+        remoteContent = snapshot.data();
+        saveLocalContent(remoteContent);
+        if (typeof onChange === "function") onChange(remoteContent);
+      }
+      applyPublicPage();
+    }, function (error) {
+      console.warn("Não foi possível ler o Firestore:", error);
+    });
+  }
+
+  function userIsAdmin(user) {
+    var allowed = String(firebaseConfig.adminEmail || "").toLowerCase();
+    return !!(user && user.email && user.email.toLowerCase() === allowed);
+  }
+
+  function cleanFileName(name) {
+    return String(name || "imagem")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9._-]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 90) || "imagem";
+  }
+
+  async function uploadImage(siteKey, file, folder) {
+    if (!firebaseState.storage) {
+      throw new Error("Firebase Storage não carregou.");
+    }
+    if (!userIsAdmin(firebaseState.user)) {
+      throw new Error("Entre com o e-mail autorizado antes de enviar imagem.");
+    }
+    if (!file) {
+      throw new Error("Escolha uma imagem primeiro.");
+    }
+    if (!file.type || file.type.indexOf("image/") !== 0) {
+      throw new Error("O arquivo precisa ser uma imagem.");
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      throw new Error("Imagem muito grande. Use até 10 MB.");
+    }
+
+    var random = Math.random().toString(36).slice(2, 8);
+    var fileName = Date.now() + "-" + random + "-" + cleanFileName(file.name);
+    var storagePath = "hne_site/" + siteKey + "/" + folder + "/" + fileName;
+    var ref = firebaseState.storage.ref().child(storagePath);
+    var snapshot = await ref.put(file, {
+      contentType: file.type,
+      customMetadata: {
+        site: siteKey,
+        uploadedBy: firebaseState.user.email || ""
+      }
+    });
+    return snapshot.ref.getDownloadURL();
+  }
+
   function initAdmin() {
     var root = document.querySelector("[data-hne-admin]");
     if (!root) return;
@@ -362,7 +462,20 @@
       saveFile: document.getElementById("admin-save-file"),
       reset: document.getElementById("admin-reset"),
       addPhoto: document.getElementById("admin-add-photo"),
-      addVideo: document.getElementById("admin-add-video")
+      addVideo: document.getElementById("admin-add-video"),
+      heroBgFile: document.getElementById("admin-hero-bg-file"),
+      heroBgUpload: document.getElementById("admin-upload-hero-bg"),
+      heroPhotoFile: document.getElementById("admin-hero-photo-file"),
+      heroPhotoUpload: document.getElementById("admin-upload-hero-photo"),
+      aboutPhotoFile: document.getElementById("admin-about-photo-file"),
+      aboutPhotoUpload: document.getElementById("admin-upload-about-photo"),
+      galleryFiles: document.getElementById("admin-gallery-files"),
+      galleryUpload: document.getElementById("admin-upload-gallery"),
+      loginEmail: document.getElementById("admin-login-email"),
+      loginPassword: document.getElementById("admin-login-password"),
+      login: document.getElementById("admin-login"),
+      logout: document.getElementById("admin-logout"),
+      user: document.getElementById("admin-user")
     };
 
     Object.keys(content.sites).forEach(function (siteKey) {
@@ -371,6 +484,8 @@
       option.textContent = content.sites[siteKey].label || siteKey;
       elements.site.appendChild(option);
     });
+
+    elements.loginEmail.value = firebaseConfig.adminEmail || "";
 
     function siteConfig() {
       return PAGE_CONFIG[currentSiteKey] || {};
@@ -383,6 +498,54 @@
     function setStatus(message) {
       elements.status.textContent = message;
       elements.status.dataset.state = message ? "active" : "";
+    }
+
+    function setWriteEnabled(enabled) {
+      [
+        elements.save,
+        elements.reset,
+        elements.addPhoto,
+        elements.addVideo,
+        elements.heroBgUpload,
+        elements.heroPhotoUpload,
+        elements.aboutPhotoUpload,
+        elements.galleryUpload
+      ].forEach(function (button) {
+        if (button) button.disabled = !enabled;
+      });
+      [
+        elements.photoUrl,
+        elements.videoUrl,
+        elements.heroBgFile,
+        elements.heroPhotoFile,
+        elements.aboutPhotoFile,
+        elements.galleryFiles
+      ].forEach(function (field) {
+        if (field) field.disabled = !enabled;
+      });
+    }
+
+    function updateAuthUi(user) {
+      firebaseState.user = user || null;
+      var allowed = userIsAdmin(user);
+      if (!firebaseState.ready) {
+        elements.user.textContent = "Firebase não carregou. As alterações ficam apenas neste navegador.";
+        setWriteEnabled(true);
+        return;
+      }
+      if (allowed) {
+        elements.user.textContent = "Logado como " + user.email + ".";
+        elements.login.hidden = true;
+        elements.logout.hidden = false;
+        elements.loginPassword.hidden = true;
+        setWriteEnabled(true);
+      } else {
+        elements.user.textContent = user ? "E-mail sem permissão: " + user.email : "Entre com " + (firebaseConfig.adminEmail || "o e-mail autorizado") + " para salvar online.";
+        elements.login.hidden = false;
+        elements.logout.hidden = true;
+        elements.loginPassword.hidden = false;
+        setWriteEnabled(false);
+      }
     }
 
     function setGroupVisibility() {
@@ -409,6 +572,7 @@
     }
 
     function fillForm() {
+      content = getContent();
       var site = siteData();
       elements.site.value = currentSiteKey;
       elements.heroTitle.value = (site.fields && site.fields.heroTitle) || "";
@@ -423,7 +587,6 @@
       setGroupVisibility();
       renderPhotos();
       renderVideosList();
-      setStatus("");
     }
 
     function collectForm() {
@@ -444,37 +607,110 @@
       return site;
     }
 
-    function saveCurrentSite() {
+    async function saveCurrentSite() {
+      if (firebaseState.ready && !userIsAdmin(firebaseState.user)) {
+        setStatus("Entre com o e-mail autorizado antes de salvar.");
+        return;
+      }
       content.sites[currentSiteKey] = collectForm();
-      content = saveContent(content);
+      content = await saveContent(content);
       localStorage.setItem(LAST_SITE_KEY, currentSiteKey);
-      setStatus("Alterações salvas.");
+      setStatus(firebaseState.ready ? "Alterações salvas no Firestore." : "Alterações salvas neste navegador.");
     }
 
     elements.site.addEventListener("change", function () {
       currentSiteKey = elements.site.value;
       localStorage.setItem(LAST_SITE_KEY, currentSiteKey);
       fillForm();
+      setStatus("");
+    });
+
+    elements.login.addEventListener("click", async function () {
+      if (!firebaseState.auth) {
+        setStatus("Firebase Auth não carregou.");
+        return;
+      }
+      try {
+        await firebaseState.auth.signInWithEmailAndPassword(elements.loginEmail.value.trim(), elements.loginPassword.value);
+        elements.loginPassword.value = "";
+        setStatus("Login feito.");
+      } catch (error) {
+        setStatus("Não foi possível entrar. Confira se o usuário existe no Firebase Authentication.");
+      }
+    });
+
+    elements.logout.addEventListener("click", async function () {
+      if (firebaseState.auth) await firebaseState.auth.signOut();
+      setStatus("Sessão encerrada.");
     });
 
     elements.save.addEventListener("click", function () {
-      saveCurrentSite();
+      saveCurrentSite().catch(function () {
+        setStatus("Erro ao salvar no Firestore.");
+      });
+    });
+
+    async function uploadToField(fileInput, urlInput, folder) {
+      try {
+        var file = fileInput.files && fileInput.files[0];
+        setStatus("Enviando imagem...");
+        var url = await uploadImage(currentSiteKey, file, folder);
+        urlInput.value = url;
+        fileInput.value = "";
+        setStatus("Imagem enviada. Clique em Salvar e aplicar para publicar.");
+      } catch (error) {
+        setStatus(error.message || "Não foi possível enviar a imagem.");
+      }
+    }
+
+    elements.heroBgUpload.addEventListener("click", function () {
+      uploadToField(elements.heroBgFile, elements.heroBg, "principais");
+    });
+
+    elements.heroPhotoUpload.addEventListener("click", function () {
+      uploadToField(elements.heroPhotoFile, elements.heroPhoto, "principais");
+    });
+
+    elements.aboutPhotoUpload.addEventListener("click", function () {
+      uploadToField(elements.aboutPhotoFile, elements.aboutPhoto, "principais");
+    });
+
+    elements.galleryUpload.addEventListener("click", async function () {
+      var files = Array.prototype.slice.call(elements.galleryFiles.files || []);
+      if (!files.length) {
+        setStatus("Escolha uma ou mais fotos primeiro.");
+        return;
+      }
+      try {
+        setStatus("Enviando " + files.length + " foto(s)...");
+        var site = siteData();
+        site.gallery = normalizeGallery(site.gallery);
+        for (var i = 0; i < files.length; i += 1) {
+          var url = await uploadImage(currentSiteKey, files[i], "galeria");
+          site.gallery.push({ src: url, alt: files[i].name || ("Foto " + site.gallery.length) });
+          setStatus("Enviando foto " + (i + 1) + " de " + files.length + "...");
+        }
+        elements.galleryFiles.value = "";
+        renderPhotos();
+        setStatus("Fotos enviadas. Clique em Salvar e aplicar para publicar.");
+      } catch (error) {
+        setStatus(error.message || "Não foi possível enviar as fotos.");
+      }
     });
 
     elements.open.addEventListener("click", function () {
-      saveCurrentSite();
       window.open(siteData().page, "_blank", "noopener");
     });
 
     elements.download.addEventListener("click", function () {
-      saveCurrentSite();
+      content.sites[currentSiteKey] = collectForm();
       downloadContentFile(content);
       setStatus("Arquivo gerado.");
     });
 
     elements.saveFile.addEventListener("click", async function () {
       try {
-        saveCurrentSite();
+        content.sites[currentSiteKey] = collectForm();
         await saveContentFile(content);
         setStatus("Arquivo pronto.");
       } catch (error) {
@@ -485,9 +721,8 @@
     elements.reset.addEventListener("click", function () {
       if (!confirm("Restaurar o conteúdo original desta página?")) return;
       content.sites[currentSiteKey] = copy(DEFAULT_CONTENT.sites[currentSiteKey]);
-      content = saveContent(content);
       fillForm();
-      setStatus("Página restaurada.");
+      setStatus("Página restaurada. Clique em salvar para publicar.");
     });
 
     elements.addPhoto.addEventListener("click", function () {
@@ -534,12 +769,24 @@
       renderVideosList();
     });
 
+    if (firebaseState.auth) {
+      firebaseState.auth.onAuthStateChanged(updateAuthUi);
+    } else {
+      updateAuthUi(null);
+    }
+
     fillForm();
+    firebaseState.adminReady = true;
+    watchRemoteContent(fillForm);
   }
 
   function boot() {
+    setupFirebase();
     initAdmin();
     applyPublicPage();
+    if (!document.querySelector("[data-hne-admin]")) {
+      watchRemoteContent(applyPublicPage);
+    }
   }
 
   if (document.readyState === "loading") {
