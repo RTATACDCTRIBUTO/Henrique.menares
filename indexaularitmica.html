@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henrique Menares | Instrutor de Violão e Rítmica</title>
+  <meta name="description" content="Aprenda violão e rítmica com Henrique Menares. Aulas individuais para todos os níveis.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracota: '#A0522D',
+                        beige: '#F5F0EB',
+                        gold: '#FFC400',
+                        dark: '#111111',
+                        navy: '#102A43'
+                    },
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+  <style>
+        * { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hero-overlay { background: linear-gradient(135deg, rgba(17,17,17,0.82) 0%, rgba(17,17,17,0.5) 100%); }
+        .service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #FFC400; border: 3px solid #A0522D; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-content.open { max-height: 300px; }
+        .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .float-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s; }
+        .float-whatsapp:hover { transform: scale(1.1); }
+        .nav-scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(14px); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    </style>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full bg-white text-dark overflow-x-hidden" style="background: rgb(255, 255, 255);"><!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 py-4">
+   <div class="max-w-7xl mx-auto flex items-center justify-between"><a href="#home" data-template-id="nav-logo" class="canva-text font-heading font-extrabold text-2xl text-white" style="color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Henrique Menares</a>
+    <div class="hidden md:flex items-center gap-8"><a href="#home" data-template-id="nav-home" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Home</a> <a href="#sobre" data-template-id="nav-sobre" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Sobre</a> <a href="#servicos" data-template-id="nav-servicos" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Serviços</a> <a href="#depoimentos" data-template-id="nav-depoimentos" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Depoimentos</a> <a href="#faq" data-template-id="nav-faq" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">FAQ</a> <a href="#contato" data-template-id="nav-contato" class="canva-link text-white/90 hover:text-gold transition font-medium text-sm" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Contato</a> <a href="#contato" data-template-id="nav-cta" class="canva-button bg-gold text-dark font-heading font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-yellow-400 transition" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Agendar Aula</a>
+    </div><button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"> <i data-lucide="menu" style="width:28px;height:28px"></i> </button>
+   </div><!-- Mobile menu -->
+   <div id="mobile-menu" class="hidden md:hidden mt-4 glass rounded-2xl p-6 space-y-4"><a href="#home" class="block text-dark font-medium">Home</a> <a href="#sobre" class="block text-dark font-medium">Sobre</a> <a href="#servicos" class="block text-dark font-medium">Serviços</a> <a href="#depoimentos" class="block text-dark font-medium">Depoimentos</a> <a href="#faq" class="block text-dark font-medium">FAQ</a> <a href="#contato" class="block text-dark font-medium">Contato</a>
+   </div>
+  </nav><!-- HERO -->
+  <header id="home" class="relative w-full min-h-screen flex items-center"><img data-template-id="hero-bg" class="canva-image absolute inset-0 w-full h-full object-cover" loading="eager" src="https://images.pexels.com/photos/7715356/pexels-photo-7715356.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Close-up view of an acoustic guitar in warm, dramatic lighting">
+   <div class="hero-overlay absolute inset-0"></div>
+   <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-32 flex flex-col lg:flex-row items-center gap-12">
+    <div class="flex-1 text-center lg:text-left">
+     <h1 data-template-id="hero-title" class="canva-text font-heading font-extrabold text-5xl md:text-6xl lg:text-7xl text-white leading-tight" style="color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 64px;">Henrique Menares</h1>
+     <p data-template-id="hero-subtitle" class="canva-text text-white/80 text-lg md:text-xl mt-4 font-medium" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 20px;">Instrutor e Professor de Violão e Rítmica</p>
+     <p data-template-id="hero-desc" class="canva-text text-white/70 text-base md:text-lg mt-3 max-w-lg" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 17px;">Aprenda a dar corpo ao seu som e extrair toda sua musicalidade. O corpo da música está no ritmo.</p>
+     <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start"><a href="#contato" data-template-id="hero-cta1" class="canva-button bg-gold text-dark font-heading font-semibold px-8 py-4 rounded-full text-base hover:bg-yellow-400 transition inline-block text-center" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Agendar Aula</a> <!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" data-template-id="hero-cta2" class="canva-button border-2 border-white text-white font-heading font-semibold px-8 py-4 rounded-full text-base hover:bg-white hover:text-dark transition inline-block text-center" style="color: rgb(255, 255, 255); font-weight: 600; font-style: normal; font-size: 16px;">Falar no WhatsApp</a>
+     </div>
+    </div>
+    <div class="flex-shrink-0"><!-- ADICIONAR FOTO DO HENRIQUE AQUI --> <img data-template-id="hero-profile" class="canva-image w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-gold/50 shadow-2xl" loading="eager" src="https://images.pexels.com/photos/4186427/pexels-photo-4186427.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Henrique Menares - Professor de violão e rítmica">
+    </div>
+   </div>
+  </header><!-- STATS -->
+  <section class="w-full bg-beige py-16">
+   <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="fade-in text-center p-6 bg-white rounded-2xl shadow-sm service-card">
+     <p class="font-heading font-extrabold text-3xl text-terracota" id="counter-1">0</p>
+     <p data-template-id="stat-1-label" class="canva-text text-sm text-dark/70 mt-2 font-medium" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Aulas Ministradas</p>
+    </div>
+    <div class="fade-in text-center p-6 bg-white rounded-2xl shadow-sm service-card">
+     <p class="font-heading font-extrabold text-3xl text-terracota" id="counter-2">0</p>
+     <p data-template-id="stat-2-label" class="canva-text text-sm text-dark/70 mt-2 font-medium" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Alunos Aprovados</p>
+    </div>
+    <div class="fade-in text-center p-6 bg-white rounded-2xl shadow-sm service-card">
+     <p class="font-heading font-extrabold text-3xl text-gold">★★★★★</p>
+     <p data-template-id="stat-3-label" class="canva-text text-sm text-dark/70 mt-2 font-medium" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Avaliação dos Alunos</p>
+    </div>
+    <div class="fade-in text-center p-6 bg-white rounded-2xl shadow-sm service-card">
+     <p class="font-heading font-extrabold text-3xl text-terracota">100%</p>
+     <p data-template-id="stat-4-label" class="canva-text text-sm text-dark/70 mt-2 font-medium" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Atendimento Individual</p>
+    </div>
+   </div>
+  </section><!-- SOBRE -->
+  <section id="sobre" class="w-full py-24 bg-white">
+   <div class="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+    <div class="fade-in flex-shrink-0"><!-- ADICIONAR FOTO AQUI --> <img data-template-id="about-photo" class="canva-image w-full max-w-md rounded-3xl shadow-xl object-cover" loading="lazy" src="https://images.pexels.com/photos/7520985/pexels-photo-7520985.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Henrique Menares ensinando violão em aula">
+    </div>
+    <div class="fade-in flex-1">
+     <h2 data-template-id="about-title" class="canva-text font-heading font-extrabold text-4xl text-dark" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Sobre Henrique Menares</h2>
+     <p data-template-id="about-text-1" class="canva-text text-dark/70 mt-6 text-lg leading-relaxed" style="color: rgb(51, 51, 51); font-weight: 400; font-style: normal; font-size: 16px;">Com mais de 10 anos de experiência no ensino de violão e rítmica, Henrique Menares desenvolveu um método único que une técnica, musicalidade e expressão corporal. Sua abordagem é baseada nos grandes mestres do blues, jazz e bossa nova.</p>
+     <p data-template-id="about-text-2" class="canva-text text-dark/70 mt-4 text-lg leading-relaxed" style="color: rgb(51, 51, 51); font-weight: 400; font-style: normal; font-size: 16px;">Cada aula é personalizada para o nível e objetivos do aluno, garantindo evolução constante e prazer em cada acorde. O foco está sempre no ritmo — a essência que dá vida à música.</p>
+    </div>
+   </div>
+  </section><!-- SERVIÇOS -->
+  <section id="servicos" class="w-full py-24 bg-beige">
+   <div class="max-w-6xl mx-auto px-6">
+    <h2 data-template-id="services-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Serviços</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-14">
+     <div data-template-id="svc-1" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="music" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-1-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Primeiro Contato com o Instrumento</h3>
+      <p data-template-id="svc-1-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Para quem nunca tocou e quer começar do zero com a base correta.</p>
+     </div>
+     <div data-template-id="svc-2" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="guitar" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-2-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Iniciante</h3>
+      <p data-template-id="svc-2-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Construção de base sólida em acordes, ritmos e leitura musical.</p>
+     </div>
+     <div data-template-id="svc-3" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="trending-up" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-3-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Intermediário</h3>
+      <p data-template-id="svc-3-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Aprofundamento técnico, pestanas, levadas e improvisação.</p>
+     </div>
+     <div data-template-id="svc-4" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="list-music" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-4-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Melhorar Meu Repertório</h3>
+      <p data-template-id="svc-4-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Expanda seu repertório com arranjos profissionais e novas sonoridades.</p>
+     </div>
+     <div data-template-id="svc-5" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="hand" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-5-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Desbloquear Dedilhado</h3>
+      <p data-template-id="svc-5-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Técnicas avançadas de dedilhado para dar vida às suas interpretações.</p>
+     </div>
+     <div data-template-id="svc-6" class="canva-card fade-in service-card bg-white rounded-2xl p-8 border border-beige" style="background: rgb(255, 255, 255);">
+      <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4">
+       <i data-lucide="award" class="text-terracota" style="width:24px;height:24px"></i>
+      </div>
+      <h3 data-template-id="svc-6-title" class="canva-text font-heading font-semibold text-xl text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 19px;">Curso Completo do Zero ao Avançado</h3>
+      <p data-template-id="svc-6-desc" class="canva-text text-dark/60 mt-3" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Jornada completa de aprendizado com acompanhamento contínuo.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- COMO FUNCIONA -->
+  <section class="w-full py-24 bg-white">
+   <div class="max-w-3xl mx-auto px-6">
+    <h2 data-template-id="timeline-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Como Funciona</h2>
+    <div class="mt-16 space-y-0">
+     <div class="fade-in flex gap-6 items-start">
+      <div class="flex flex-col items-center">
+       <div class="timeline-dot"></div>
+       <div class="w-0.5 h-16 bg-gold/30"></div>
+      </div>
+      <div class="pb-8">
+       <h4 data-template-id="step-1-title" class="canva-text font-heading font-semibold text-lg text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">1. Contato</h4>
+       <p data-template-id="step-1-desc" class="canva-text text-dark/60 mt-1" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Entre em contato pelo WhatsApp ou formulário.</p>
+      </div>
+     </div>
+     <div class="fade-in flex gap-6 items-start">
+      <div class="flex flex-col items-center">
+       <div class="timeline-dot"></div>
+       <div class="w-0.5 h-16 bg-gold/30"></div>
+      </div>
+      <div class="pb-8">
+       <h4 data-template-id="step-2-title" class="canva-text font-heading font-semibold text-lg text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">2. Agendamento</h4>
+       <p data-template-id="step-2-desc" class="canva-text text-dark/60 mt-1" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Escolhemos o melhor horário para sua aula.</p>
+      </div>
+     </div>
+     <div class="fade-in flex gap-6 items-start">
+      <div class="flex flex-col items-center">
+       <div class="timeline-dot"></div>
+       <div class="w-0.5 h-16 bg-gold/30"></div>
+      </div>
+      <div class="pb-8">
+       <h4 data-template-id="step-3-title" class="canva-text font-heading font-semibold text-lg text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">3. Primeira Aula</h4>
+       <p data-template-id="step-3-desc" class="canva-text text-dark/60 mt-1" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Avaliação do seu nível e definição de objetivos.</p>
+      </div>
+     </div>
+     <div class="fade-in flex gap-6 items-start">
+      <div class="flex flex-col items-center">
+       <div class="timeline-dot"></div>
+       <div class="w-0.5 h-16 bg-gold/30"></div>
+      </div>
+      <div class="pb-8">
+       <h4 data-template-id="step-4-title" class="canva-text font-heading font-semibold text-lg text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">4. Treinamentos</h4>
+       <p data-template-id="step-4-desc" class="canva-text text-dark/60 mt-1" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Prática direcionada com exercícios personalizados.</p>
+      </div>
+     </div>
+     <div class="fade-in flex gap-6 items-start">
+      <div class="flex flex-col items-center">
+       <div class="timeline-dot"></div>
+      </div>
+      <div>
+       <h4 data-template-id="step-5-title" class="canva-text font-heading font-semibold text-lg text-dark" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">5. Confiança no Instrumento</h4>
+       <p data-template-id="step-5-desc" class="canva-text text-dark/60 mt-1" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Toque com segurança e expressão musical.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- GALERIA -->
+  <section class="w-full py-24 bg-beige">
+   <div class="max-w-6xl mx-auto px-6">
+    <h2 data-template-id="gallery-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Galeria</h2>
+    <div class="mt-14 grid grid-cols-2 md:grid-cols-3 gap-4">
+     <div class="fade-in cursor-pointer overflow-hidden rounded-2xl" onclick="openLightbox(0)"><img data-template-id="gallery-1" class="canva-image w-full h-64 object-cover hover:scale-105 transition duration-500" loading="lazy" src="https://images.pexels.com/photos/6295107/pexels-photo-6295107.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up de violão com iluminação artística">
+     </div>
+     <div class="fade-in cursor-pointer overflow-hidden rounded-2xl md:row-span-2" onclick="openLightbox(1)"><img data-template-id="gallery-2" class="canva-image w-full h-full min-h-[320px] object-cover hover:scale-105 transition duration-500" loading="lazy" src="https://images.pexels.com/photos/7715347/pexels-photo-7715347.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Músico tocando violão no palco">
+     </div>
+     <div class="fade-in cursor-pointer overflow-hidden rounded-2xl" onclick="openLightbox(2)"><img data-template-id="gallery-3" class="canva-image w-full h-64 object-cover hover:scale-105 transition duration-500" loading="lazy" src="https://images.pexels.com/photos/7520989/pexels-photo-7520989.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Aula de violão com aluno">
+     </div>
+     <div class="fade-in cursor-pointer overflow-hidden rounded-2xl" onclick="openLightbox(3)"><img data-template-id="gallery-4" class="canva-image w-full h-64 object-cover hover:scale-105 transition duration-500" loading="lazy" src="https://images.pexels.com/photos/8160404/pexels-photo-8160404.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Detalhe de violão acústico">
+     </div>
+     <div class="fade-in cursor-pointer overflow-hidden rounded-2xl" onclick="openLightbox(4)"><img data-template-id="gallery-5" class="canva-image w-full h-64 object-cover hover:scale-105 transition duration-500" loading="lazy" src="https://images.pexels.com/photos/5827094/pexels-photo-5827094.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Estúdio musical com instrumentos">
+     </div>
+    </div>
+   </div>
+  </section><!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightbox-img" class="max-w-[90vw] max-h-[85vh] rounded-xl object-contain"> <button class="absolute top-6 right-6 text-white" aria-label="Fechar"><i data-lucide="x" style="width:32px;height:32px"></i></button>
+  </div><!-- VÍDEOS -->
+  <section class="w-full py-24 bg-white">
+   <div class="max-w-6xl mx-auto px-6">
+    <h2 data-template-id="videos-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Vídeos</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="fade-in rounded-2xl overflow-hidden aspect-video bg-dark/5"><iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe>
+     </div>
+    </div>
+   </div>
+  </section><!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="w-full py-24 bg-beige">
+   <div class="max-w-4xl mx-auto px-6">
+    <h2 data-template-id="testimonials-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">O que dizem os alunos</h2>
+    <div class="mt-14 relative overflow-hidden">
+     <div id="carousel" class="flex transition-transform duration-500"><!-- Testimonial 1 -->
+      <div class="w-full flex-shrink-0 px-4">
+       <div class="bg-white rounded-2xl p-8 shadow-sm text-center"><img data-template-id="test-1-photo" class="canva-image w-20 h-20 rounded-full object-cover mx-auto" loading="lazy" src="https://images.pexels.com/photos/14059774/pexels-photo-14059774.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Foto do aluno Lucas">
+        <p class="text-gold mt-4 text-lg">★★★★★</p>
+        <p data-template-id="test-1-text" class="canva-text text-dark/70 mt-4 italic text-lg leading-relaxed" style="color: rgb(51, 51, 51); font-weight: 400; font-style: italic; font-size: 16px;">O Henrique transformou minha forma de tocar. Em poucos meses eu já estava tocando músicas que achava impossíveis. O método rítmico dele é incrível!</p>
+        <p data-template-id="test-1-name" class="canva-text font-heading font-semibold text-dark mt-4" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Lucas Oliveira</p>
+        <p data-template-id="test-1-city" class="canva-text text-dark/50 text-sm" style="color: rgb(119, 119, 119); font-weight: 400; font-style: normal; font-size: 16px;">São Paulo, SP</p>
+       </div>
+      </div><!-- Testimonial 2 -->
+      <div class="w-full flex-shrink-0 px-4">
+       <div class="bg-white rounded-2xl p-8 shadow-sm text-center"><img data-template-id="test-2-photo" class="canva-image w-20 h-20 rounded-full object-cover mx-auto" loading="lazy" src="https://images.pexels.com/photos/32506651/pexels-photo-32506651.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Foto da aluna Camila">
+        <p class="text-gold mt-4 text-lg">★★★★★</p>
+        <p data-template-id="test-2-text" class="canva-text text-dark/70 mt-4 italic text-lg leading-relaxed" style="color: rgb(51, 51, 51); font-weight: 400; font-style: italic; font-size: 16px;">Sempre quis aprender violão mas tinha medo de não conseguir. O Henrique me deu confiança desde a primeira aula. Recomendo demais!</p>
+        <p data-template-id="test-2-name" class="canva-text font-heading font-semibold text-dark mt-4" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Camila Santos</p>
+        <p data-template-id="test-2-city" class="canva-text text-dark/50 text-sm" style="color: rgb(119, 119, 119); font-weight: 400; font-style: normal; font-size: 16px;">Campinas, SP</p>
+       </div>
+      </div><!-- Testimonial 3 -->
+      <div class="w-full flex-shrink-0 px-4">
+       <div class="bg-white rounded-2xl p-8 shadow-sm text-center"><img data-template-id="test-3-photo" class="canva-image w-20 h-20 rounded-full object-cover mx-auto" loading="lazy" src="https://images.pexels.com/photos/30535778/pexels-photo-30535778.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Foto do aluno Roberto">
+        <p class="text-gold mt-4 text-lg">★★★★★</p>
+        <p data-template-id="test-3-text" class="canva-text text-dark/70 mt-4 italic text-lg leading-relaxed" style="color: rgb(51, 51, 51); font-weight: 400; font-style: italic; font-size: 16px;">Já tocava há anos mas não evoluía. Com o método do Henrique, desbloqueei o dedilhado e minha musicalidade está em outro nível.</p>
+        <p data-template-id="test-3-name" class="canva-text font-heading font-semibold text-dark mt-4" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Roberto Mendes</p>
+        <p data-template-id="test-3-city" class="canva-text text-dark/50 text-sm" style="color: rgb(119, 119, 119); font-weight: 400; font-style: normal; font-size: 16px;">Ribeirão Preto, SP</p>
+       </div>
+      </div>
+     </div>
+     <div class="flex justify-center gap-3 mt-8"><button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center hover:bg-gold/20 transition" aria-label="Anterior"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-white shadow flex items-center justify-center hover:bg-gold/20 transition" aria-label="Próximo"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+    </div>
+   </div>
+  </section><!-- FAQ -->
+  <section id="faq" class="w-full py-24 bg-white">
+   <div class="max-w-3xl mx-auto px-6">
+    <h2 data-template-id="faq-title" class="canva-text font-heading font-extrabold text-4xl text-dark text-center fade-in" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Perguntas Frequentes</h2>
+    <div class="mt-14 space-y-4">
+     <div class="fade-in bg-beige rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 font-heading font-semibold text-dark flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-1-q" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Preciso ter violão para começar?</span> <i data-lucide="chevron-down" class="faq-icon transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-1-a" class="canva-text text-dark/70" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Sim, é importante ter um instrumento para praticar entre as aulas. Posso te orientar na escolha do melhor violão para seu nível e orçamento.</p>
+      </div>
+     </div>
+     <div class="fade-in bg-beige rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 font-heading font-semibold text-dark flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-2-q" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">As aulas são online ou presenciais?</span> <i data-lucide="chevron-down" class="faq-icon transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-2-a" class="canva-text text-dark/70" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Ofereço ambas as modalidades. As aulas online são ao vivo com acompanhamento em tempo real, tão eficientes quanto as presenciais.</p>
+      </div>
+     </div>
+     <div class="fade-in bg-beige rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 font-heading font-semibold text-dark flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-3-q" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Qual a duração de cada aula?</span> <i data-lucide="chevron-down" class="faq-icon transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-3-a" class="canva-text text-dark/70" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Cada aula tem duração de 1 hora, com conteúdo prático e teórico equilibrado para máximo aproveitamento.</p>
+      </div>
+     </div>
+     <div class="fade-in bg-beige rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 font-heading font-semibold text-dark flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-4-q" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Em quanto tempo vou tocar minha primeira música?</span> <i data-lucide="chevron-down" class="faq-icon transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-4-a" class="canva-text text-dark/70" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Depende da dedicação, mas a maioria dos alunos já toca suas primeiras músicas completas entre 4 a 8 semanas de aula.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- CONTATO -->
+  <section id="contato" class="w-full py-24 bg-beige">
+   <div class="max-w-5xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+    <div class="fade-in">
+     <h2 data-template-id="contact-title" class="canva-text font-heading font-extrabold text-4xl text-dark" style="color: rgb(17, 17, 17); font-weight: 800; font-style: normal; font-size: 24px;">Entre em Contato</h2>
+     <p data-template-id="contact-desc" class="canva-text text-dark/70 mt-4 text-lg" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">Agende sua aula experimental ou tire suas dúvidas. Estou à disposição!</p>
+     <div class="mt-8 space-y-4"><!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-dark/80 hover:text-terracota transition"> <i data-lucide="message-circle" style="width:20px;height:20px"></i> <span data-template-id="contact-whatsapp" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">(00) 00000-0000</span> </a> <!-- ALTERAR INSTAGRAM --> <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-dark/80 hover:text-terracota transition"> <i data-lucide="instagram" style="width:20px;height:20px"></i> <span data-template-id="contact-instagram" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">@henriquemenares</span> </a> <!-- ALTERAR EMAIL --> <a href="mailto:contato@exemplo.com" class="flex items-center gap-3 text-dark/80 hover:text-terracota transition"> <i data-lucide="mail" style="width:20px;height:20px"></i> <span data-template-id="contact-email" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">contato@henriquemenares.com</span> </a> <!-- ALTERAR TELEFONE --> <a href="tel:+5500000000000" class="flex items-center gap-3 text-dark/80 hover:text-terracota transition"> <i data-lucide="phone" style="width:20px;height:20px"></i> <span data-template-id="contact-phone" class="canva-text" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">(00) 00000-0000</span> </a>
+     </div>
+    </div>
+    <div class="fade-in">
+     <form id="contact-form" class="bg-white rounded-2xl p-8 shadow-sm space-y-5">
+      <div><label data-template-id="form-name-label" for="form-name" class="canva-text text-sm font-medium text-dark/80 block mb-1" style="color: rgb(17, 17, 17); font-weight: 500; font-style: normal; font-size: 16px;">Nome</label> <input id="form-name" type="text" required="" class="w-full px-4 py-3 rounded-xl border border-dark/10 focus:border-terracota focus:outline-none transition">
+      </div>
+      <div><label data-template-id="form-phone-label" for="form-phone" class="canva-text text-sm font-medium text-dark/80 block mb-1" style="color: rgb(17, 17, 17); font-weight: 500; font-style: normal; font-size: 16px;">Telefone</label> <input id="form-phone" type="tel" required="" class="w-full px-4 py-3 rounded-xl border border-dark/10 focus:border-terracota focus:outline-none transition">
+      </div>
+      <div><label data-template-id="form-city-label" for="form-city" class="canva-text text-sm font-medium text-dark/80 block mb-1" style="color: rgb(17, 17, 17); font-weight: 500; font-style: normal; font-size: 16px;">Cidade</label> <input id="form-city" type="text" class="w-full px-4 py-3 rounded-xl border border-dark/10 focus:border-terracota focus:outline-none transition">
+      </div>
+      <div><label data-template-id="form-msg-label" for="form-msg" class="canva-text text-sm font-medium text-dark/80 block mb-1" style="color: rgb(17, 17, 17); font-weight: 500; font-style: normal; font-size: 16px;">Mensagem</label> <textarea id="form-msg" rows="4" class="w-full px-4 py-3 rounded-xl border border-dark/10 focus:border-terracota focus:outline-none transition resize-none"></textarea>
+      </div><button data-template-id="form-submit" type="submit" class="canva-button w-full bg-gold text-dark font-heading font-semibold py-4 rounded-full hover:bg-yellow-400 transition text-lg" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Solicitar Aula</button>
+      <p id="form-success" class="hidden text-center text-green-600 font-medium mt-2">Mensagem enviada com sucesso!</p>
+     </form>
+    </div>
+   </div>
+  </section><!-- FOOTER -->
+  <footer class="w-full bg-dark py-12">
+   <div class="max-w-6xl mx-auto px-6 text-center">
+    <p data-template-id="footer-brand" class="canva-text font-heading font-extrabold text-2xl text-white" style="color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Henrique Menares</p>
+    <p data-template-id="footer-slogan" class="canva-text text-white/50 mt-2 italic" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">O corpo da música está no ritmo.</p>
+    <div class="flex justify-center gap-6 mt-6"><a href="#home" class="text-white/60 hover:text-gold transition text-sm">Home</a> <a href="#sobre" class="text-white/60 hover:text-gold transition text-sm">Sobre</a> <a href="#servicos" class="text-white/60 hover:text-gold transition text-sm">Serviços</a> <a href="#contato" class="text-white/60 hover:text-gold transition text-sm">Contato</a>
+    </div>
+    <p data-template-id="footer-copy" class="canva-text text-white/40 text-sm mt-8" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 Henrique Menares. Todos os direitos reservados.</p>
+   </div>
+  </footer><!-- WHATSAPP FLUTUANTE --> <!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" class="float-whatsapp" aria-label="WhatsApp">
+   <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+   </svg></a>
+  <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('nav-scrolled');
+                navbar.querySelectorAll('a:not([data-template-id="nav-cta"])').forEach(a => {
+                    a.classList.remove('text-white/90');
+                    a.classList.add('text-dark/80');
+                });
+                const logo = navbar.querySelector('[data-template-id="nav-logo"]');
+                if (logo) { logo.classList.remove('text-white'); logo.classList.add('text-dark'); }
+            } else {
+                navbar.classList.remove('nav-scrolled');
+                navbar.querySelectorAll('a:not([data-template-id="nav-cta"])').forEach(a => {
+                    a.classList.remove('text-dark/80');
+                    a.classList.add('text-white/90');
+                });
+                const logo = navbar.querySelector('[data-template-id="nav-logo"]');
+                if (logo) { logo.classList.remove('text-dark'); logo.classList.add('text-white'); }
+            }
+        });
+
+        // Mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Counter animation
+        function animateCounter(el, target) {
+            let current = 0;
+            const step = Math.ceil(target / 60);
+            const interval = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(interval); }
+                el.textContent = '+' + current;
+            }, 30);
+        }
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    if (e.target.id === 'counter-1') animateCounter(e.target, 1000);
+                    if (e.target.id === 'counter-2') animateCounter(e.target, 300);
+                    counterObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[id^="counter-"]').forEach(el => counterObserver.observe(el));
+
+        // Carousel
+        let currentSlide = 0;
+        const carousel = document.getElementById('carousel');
+        const totalSlides = 3;
+        function goToSlide(n) {
+            currentSlide = (n + totalSlides) % totalSlides;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        function nextSlide() { goToSlide(currentSlide + 1); }
+        function prevSlide() { goToSlide(currentSlide - 1); }
+        setInterval(nextSlide, 5000);
+
+        // Gallery lightbox
+        const galleryImgs = document.querySelectorAll('[data-template-id^="gallery-"]');
+        function openLightbox(idx) {
+            const src = galleryImgs[idx]?.src;
+            if (src) {
+                document.getElementById('lightbox-img').src = src;
+                document.getElementById('lightbox').classList.add('active');
+            }
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('open'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+                document.querySelectorAll('.faq-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+                if (!isOpen) {
+                    content.classList.add('open');
+                    icon.style.transform = 'rotate(180deg)';
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Form
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('form-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 4000);
+        });
+
+        lucide.createIcons();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a11f8c1056a1f1d3',t:'MTc4MjUxMTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+  <script src="site-content.js"></script>
+  <script src="site-admin.js"></script>
+</body></html>

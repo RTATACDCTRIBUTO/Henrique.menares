@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Henrique Menares | Voz e Violão</title>
+
+<meta name="description" content="Site oficial de Henrique Menares. Música ao vivo, voz e violão para eventos, bares, restaurantes e apresentações particulares.">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:#0f0f0f;
+color:white;
+overflow-x:hidden;
+}
+
+a{
+text-decoration:none;
+color:white;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+.container{
+width:min(1200px, calc(100% - 40px));
+margin:auto;
+}
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:999;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(12px);
+}
+
+.nav{
+height:80px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+height:50px;
+}
+
+.menu{
+display:flex;
+gap:30px;
+}
+
+.menu a{
+transition:.3s;
+}
+
+.menu a:hover{
+color:#d6b47c;
+}
+
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)),
+url("foto-principal.jpg");
+background-size:cover;
+background-position:center top;
+display:flex;
+align-items:center;
+}
+
+.hero-content{
+max-width:700px;
+}
+
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:5rem;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:1.2rem;
+line-height:1.8;
+color:#ddd;
+margin-bottom:30px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+border-radius:50px;
+background:#d6b47c;
+color:#111;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.section{
+padding:100px 0;
+}
+
+.section-title{
+font-family:'Playfair Display',serif;
+font-size:3rem;
+margin-bottom:25px;
+text-align:center;
+}
+
+.bio{
+max-width:900px;
+margin:auto;
+text-align:center;
+font-size:1.1rem;
+line-height:2;
+color:#d9d9d9;
+}
+
+.videos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+.video{
+border-radius:20px;
+overflow:hidden;
+}
+
+.video iframe{
+width:100%;
+height:300px;
+border:none;
+}
+
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+margin-top:50px;
+}
+
+.galeria img{
+border-radius:20px;
+height:350px;
+object-fit:cover;
+width:100%;
+}
+
+.redes{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.social{
+padding:15px 25px;
+border:1px solid rgba(255,255,255,.2);
+border-radius:50px;
+transition:.3s;
+}
+
+.social:hover{
+background:#d6b47c;
+color:black;
+}
+
+footer{
+padding:50px 20px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.1);
+color:#aaa;
+}
+
+.guitar-side{
+position:fixed;
+left:0;
+top:0;
+height:100vh;
+opacity:.08;
+pointer-events:none;
+z-index:0;
+}
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+width:65px;
+height:65px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+z-index:999;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:3rem;
+}
+
+.menu{
+display:none;
+}
+
+.section-title{
+font-size:2.2rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- VIOLÃO LATERAL -->
+<img src="violao-lateral.png" class="guitar-side">
+
+<header>
+
+<div class="container nav">
+
+<img src="logo-henrique.png" class="logo">
+
+<nav class="menu">
+<a href="#sobre">Sobre</a>
+<a href="#videos">Vídeos</a>
+<a href="#galeria">Galeria</a>
+<a href="#contato">Contato</a>
+</nav>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="container">
+
+<div class="hero-content">
+
+<h1>Henrique Menares</h1>
+
+<p>
+Música ao vivo com interpretação marcante,
+voz e violão para bares, restaurantes,
+eventos corporativos, casamentos e
+apresentações particulares.
+</p>
+
+<a href="https://wa.me/5511999999999" class="btn">
+Solicitar Orçamento
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="sobre" class="section">
+
+<div class="container">
+
+<h2 class="section-title">Sobre</h2>
+
+<p class="bio">
+
+Henrique Menares leva aos palcos um repertório cuidadosamente selecionado,
+unindo grandes clássicos nacionais à sua identidade artística.
+
+Com apresentações intimistas e envolventes,
+transforma cada evento em uma experiência única,
+criando conexão direta com o público através da música.
+
+</p>
+
+</div>
+
+</section>
+
+<section id="videos" class="section">
+
+<div class="container">
+
+<h2 class="section-title">Vídeos</h2>
+
+<div class="videos">
+
+<!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/uGNnLW2x2PQ"></iframe>
+</div>
+
+<!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/MoPxP_CCu9I"></iframe>
+</div>
+
+<!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/TPiKYHXIWzw"></iframe>
+</div>
+
+<!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/SVpLb7F5MVM"></iframe>
+</div>
+
+  <!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/aW2Rg270830"></iframe>
+</div>
+
+  <!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/nuz8ZI4vrLI"></iframe>
+</div>
+
+  <!-- COLOCAR LINK YOUTUBE AQUI -->
+<div class="video">
+<iframe src="https://www.youtube.com/embed/9pKhpzGb6DY"></iframe>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="galeria" class="section">
+
+<div class="container">
+
+<h2 class="section-title">Galeria</h2>
+
+<div class="galeria">
+
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+<img src="foto4.jpg">
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contato" class="section">
+
+<div class="container">
+
+<h2 class="section-title">Contato</h2>
+
+<div class="redes">
+
+<a class="social" href="#">
+Instagram
+</a>
+
+<a class="social" href="#">
+YouTube
+</a>
+
+<a class="social" href="#">
+Spotify
+</a>
+
+<a class="social" href="mailto:contato@email.com">
+E-mail
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Henrique Menares • Todos os direitos reservados
+</p>
+
+</footer>
+
+<a class="whatsapp" href="https://wa.me/5511999999999">
+📱
+</a>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+  <script src="site-content.js"></script>
+  <script src="site-admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin | Henrique Menares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #18202f;
+      --muted: #667085;
+      --line: #d9e0ea;
+      --brand: #126f71;
+      --brand-dark: #0d5557;
+      --accent: #d69d2f;
+      --danger: #b42318;
+      --shadow: 0 18px 45px rgba(24, 32, 47, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      background: #101828;
+      color: white;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      letter-spacing: 0;
+    }
+
+    .status {
+      min-height: 22px;
+      color: #d1fadf;
+      font-size: 0.95rem;
+      text-align: right;
+    }
+
+    .status:not([data-state="active"]) {
+      color: transparent;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 26px auto 46px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      padding: 18px;
+    }
+
+    .editor {
+      padding: 22px;
+    }
+
+    .block + .block {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 24px;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.1rem;
+      letter-spacing: 0;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field-grid .wide,
+    label.wide {
+      grid-column: 1 / -1;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      padding: 12px 13px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 112px;
+      line-height: 1.5;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(18, 111, 113, 0.14);
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .auth-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+    }
+
+    .auth-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-weight: 700;
+      color: white;
+      background: var(--brand);
+      min-height: 44px;
+    }
+
+    .btn:hover {
+      background: var(--brand-dark);
+    }
+
+    .btn.secondary {
+      background: #eef4f4;
+      color: var(--brand-dark);
+      border: 1px solid #c6dddd;
+    }
+
+    .btn.secondary:hover {
+      background: #dfecec;
+    }
+
+    .btn.warning {
+      background: #fff3d6;
+      color: #7a4d05;
+      border: 1px solid #efd18b;
+    }
+
+    .btn.warning:hover {
+      background: #ffe8ad;
+    }
+
+    .inline-add {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .media-list {
+      list-style: none;
+      margin: 16px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .media-row {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      background: #fbfcfe;
+    }
+
+    #admin-video-list .media-row {
+      grid-template-columns: 1fr auto;
+    }
+
+    .media-row img {
+      width: 72px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #e9edf3;
+    }
+
+    .media-row span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .media-row button {
+      border: 0;
+      background: #fee4e2;
+      color: var(--danger);
+      border-radius: 7px;
+      padding: 9px 10px;
+      font-weight: 700;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .status {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .inline-add {
+        grid-template-columns: 1fr;
+      }
+
+      .button-row {
+        display: grid;
+      }
+
+      .media-row,
+      #admin-video-list .media-row {
+        grid-template-columns: 1fr;
+      }
+
+      .media-row img {
+        width: 100%;
+        height: 130px;
+      }
+    }
+  </style>
+</head>
+<body data-hne-admin>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <h1>Painel Admin</h1>
+        <div id="admin-status" class="status" aria-live="polite"></div>
+      </div>
+    </header>
+
+    <main>
+      <aside class="panel sidebar">
+        <label for="admin-site">
+          Site destino
+          <select id="admin-site"></select>
+        </label>
+
+        <div class="auth-box">
+          <p id="admin-user">Entre com o e-mail autorizado para salvar no Firestore.</p>
+          <label for="admin-login-email">
+            E-mail
+            <input id="admin-login-email" type="email" autocomplete="username">
+          </label>
+          <label for="admin-login-password">
+            Senha
+            <input id="admin-login-password" type="password" autocomplete="current-password">
+          </label>
+          <button id="admin-login" class="btn secondary" type="button">Entrar</button>
+          <button id="admin-logout" class="btn secondary" type="button" hidden>Sair</button>
+        </div>
+
+        <div class="actions">
+          <button id="admin-save" class="btn" type="button">Salvar e aplicar</button>
+          <button id="admin-open" class="btn secondary" type="button">Abrir página</button>
+          <button id="admin-save-file" class="btn secondary" type="button">Salvar arquivo do site</button>
+          <button id="admin-download" class="btn secondary" type="button">Baixar conteúdo</button>
+          <button id="admin-reset" class="btn warning" type="button">Restaurar página</button>
+        </div>
+      </aside>
+
+      <section class="panel editor">
+        <div class="block">
+          <h2>Texto principal</h2>
+          <div class="field-grid">
+            <label>
+              Título
+              <input id="admin-hero-title" type="text" autocomplete="off">
+            </label>
+            <label data-field-group="subtitle">
+              Subtítulo
+              <input id="admin-subtitle" type="text" autocomplete="off">
+            </label>
+            <label class="wide">
+              Texto
+              <textarea id="admin-main-text"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>Sobre</h2>
+          <div class="field-grid">
+            <label class="wide">
+              Título
+              <input id="admin-about-title" type="text" autocomplete="off">
+            </label>
+            <label class="wide">
+              Texto 1
+              <textarea id="admin-about-text"></textarea>
+            </label>
+            <label class="wide" data-field-group="aboutText2">
+              Texto 2
+              <textarea id="admin-about-text-2"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>Fotos principais</h2>
+          <div class="field-grid">
+            <label class="wide">
+              Foto de fundo
+              <input id="admin-hero-bg" type="url" placeholder="https://exemplo.com/foto.jpg">
+            </label>
+            <label class="wide" data-field-group="heroPhoto">
+              Foto de destaque
+              <input id="admin-hero-photo" type="url" placeholder="https://exemplo.com/foto.jpg">
+            </label>
+            <label class="wide" data-field-group="aboutPhoto">
+              Foto da seção sobre
+              <input id="admin-about-photo" type="url" placeholder="https://exemplo.com/foto.jpg">
+            </label>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>Galeria</h2>
+          <div class="inline-add">
+            <label>
+              URL da foto
+              <input id="admin-photo-url" type="url" placeholder="https://exemplo.com/foto.jpg">
+            </label>
+            <button id="admin-add-photo" class="btn secondary" type="button">Adicionar foto</button>
+          </div>
+          <ul id="admin-photo-list" class="media-list"></ul>
+        </div>
+
+        <div class="block">
+          <h2>Vídeos do YouTube</h2>
+          <div class="inline-add">
+            <label>
+              Link do vídeo
+              <input id="admin-video-url" type="url" placeholder="https://www.youtube.com/watch?v=...">
+            </label>
+            <button id="admin-add-video" class="btn secondary" type="button">Adicionar vídeo</button>
+          </div>
+          <ul id="admin-video-list" class="media-list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="site-content.js"></script>
+  <script src="site-admin.js"></script>
+</body>
+</html>

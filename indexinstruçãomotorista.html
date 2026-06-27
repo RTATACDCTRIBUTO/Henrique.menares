@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="pt-BR"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henrique Menares - Instrutor Particular de Direção</title>
+  <meta name="description" content="Aprenda a dirigir com segurança, confiança e tranquilidade. Instrutor particular de direção com mais de 1000 aulas ministradas.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#102A43',
+                        dark: '#111',
+                        accent: '#FFC400'
+                    }
+                }
+            }
+        }
+    </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        .glass { backdrop-filter: blur(12px); background: rgba(255,255,255,0.85); }
+        .glass-dark { backdrop-filter: blur(12px); background: rgba(16,42,67,0.9); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .service-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(16,42,67,0.15); }
+        .timeline-dot { width: 48px; height: 48px; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-content.open { max-height: 300px; }
+        .float-btn { animation: pulse-float 2s infinite; }
+        @keyframes pulse-float { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        .hero-overlay { background: linear-gradient(135deg, rgba(16,42,67,0.85) 0%, rgba(17,17,17,0.7) 100%); }
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full" style="background: rgb(255, 255, 255);"><!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4">
+   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between"><a href="#" data-template-id="nav-logo" class="canva-text text-2xl font-extrabold text-white" style="font-family: Poppins; color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Henrique Menares</a>
+    <div class="hidden md:flex items-center gap-8"><a href="#home" class="text-white/80 hover:text-accent transition text-sm font-medium">Home</a> <a href="#sobre" class="text-white/80 hover:text-accent transition text-sm font-medium">Sobre</a> <a href="#servicos" class="text-white/80 hover:text-accent transition text-sm font-medium">Serviços</a> <a href="#depoimentos" class="text-white/80 hover:text-accent transition text-sm font-medium">Depoimentos</a> <a href="#faq" class="text-white/80 hover:text-accent transition text-sm font-medium">FAQ</a> <a href="#contato" class="text-white/80 hover:text-accent transition text-sm font-medium">Contato</a> <a href="#contato" data-template-id="nav-cta" class="canva-button bg-accent text-dark px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-yellow-300 transition" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 600; font-style: normal; font-size: 16px;">Agendar Aula</a>
+    </div><button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Menu"> <i data-lucide="menu" style="width:28px;height:28px"></i> </button>
+   </div>
+   <div id="mobile-menu" class="hidden md:hidden glass-dark mt-2 mx-4 rounded-2xl p-6 flex flex-col gap-4"><a href="#home" class="text-white/90 font-medium">Home</a> <a href="#sobre" class="text-white/90 font-medium">Sobre</a> <a href="#servicos" class="text-white/90 font-medium">Serviços</a> <a href="#depoimentos" class="text-white/90 font-medium">Depoimentos</a> <a href="#faq" class="text-white/90 font-medium">FAQ</a> <a href="#contato" class="text-white/90 font-medium">Contato</a> <a href="#contato" class="bg-accent text-dark px-5 py-2.5 rounded-full font-semibold text-sm text-center">Agendar Aula</a>
+   </div>
+  </nav><!-- HERO -->
+  <section id="home" class="relative w-full" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));"><img data-template-id="hero-bg" class="canva-image absolute inset-0 w-full h-full object-cover" loading="eager" src="https://images.pexels.com/photos/5063634/pexels-photo-5063634.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Carro elegante em rodovia ao pôr do sol">
+   <div class="hero-overlay absolute inset-0"></div>
+   <div class="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center" style="min-height: calc(100 * min(var(--vh, 1vh), 1vh));">
+    <div class="grid md:grid-cols-2 gap-12 items-center w-full py-24">
+     <div class="reveal">
+      <p data-template-id="hero-subtitle" class="canva-text text-accent font-semibold uppercase tracking-widest text-sm mb-4" style="color: rgb(255, 196, 0); font-weight: 600; font-style: normal; font-size: 14px;">Instrutor Particular de Direção</p>
+      <h1 data-template-id="hero-title" class="canva-text text-white font-extrabold text-4xl md:text-6xl leading-tight mb-4" style="font-family: Poppins; color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 32px;">Henrique Menares</h1>
+      <p data-template-id="hero-slogan" class="canva-text text-white/80 text-lg md:text-xl mb-8 max-w-lg" style="color: rgba(255, 255, 255, 0.8); font-weight: 400; font-style: normal; font-size: 16px;">Aprenda a dirigir com segurança, confiança e tranquilidade.</p>
+      <div class="flex flex-wrap gap-4"><a href="#contato" data-template-id="hero-btn-1" class="canva-button bg-accent text-dark px-8 py-4 rounded-full font-bold text-base hover:bg-yellow-300 transition shadow-lg" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 700; font-style: normal; font-size: 16px;">Agendar Aula</a> <!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" data-template-id="hero-btn-2" class="canva-button border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-dark transition" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Falar no WhatsApp</a>
+      </div>
+     </div>
+     <div class="reveal hidden md:flex justify-end"><!-- ADICIONAR FOTO DO HENRIQUE AQUI --> <img data-template-id="hero-portrait" class="canva-image w-80 h-80 object-cover rounded-3xl shadow-2xl border-4 border-accent/30" loading="eager" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Henrique Menares - Instrutor de Direção">
+     </div>
+    </div>
+   </div>
+  </section><!-- STATS -->
+  <section class="w-full bg-white py-16 -mt-1">
+   <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="reveal text-center p-6 rounded-2xl bg-gray-50">
+     <div class="text-4xl font-extrabold text-navy counter" data-target="1000">
+      0
+     </div>
+     <p data-template-id="stat-1-label" class="canva-text text-gray-600 mt-2 text-sm font-medium" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Aulas Ministradas</p>
+    </div>
+    <div class="reveal text-center p-6 rounded-2xl bg-gray-50">
+     <div class="text-4xl font-extrabold text-navy counter" data-target="300">
+      0
+     </div>
+     <p data-template-id="stat-2-label" class="canva-text text-gray-600 mt-2 text-sm font-medium" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Alunos Aprovados</p>
+    </div>
+    <div class="reveal text-center p-6 rounded-2xl bg-gray-50">
+     <div class="text-3xl font-extrabold text-accent">
+      ★★★★★
+     </div>
+     <p data-template-id="stat-3-label" class="canva-text text-gray-600 mt-2 text-sm font-medium" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Avaliação dos Alunos</p>
+    </div>
+    <div class="reveal text-center p-6 rounded-2xl bg-gray-50">
+     <div class="text-4xl font-extrabold text-navy">
+      100%
+     </div>
+     <p data-template-id="stat-4-label" class="canva-text text-gray-600 mt-2 text-sm font-medium" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Atendimento Individual</p>
+    </div>
+   </div>
+  </section><!-- SOBRE -->
+  <section id="sobre" class="w-full py-24 bg-gray-50">
+   <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal"><!-- ADICIONAR FOTO AQUI --> <img data-template-id="about-photo" class="canva-image w-full h-[500px] object-cover rounded-3xl shadow-xl" loading="lazy" src="https://images.pexels.com/photos/9518018/pexels-photo-9518018.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Instrutor orientando aluno em aula de direção">
+    </div>
+    <div class="reveal">
+     <p data-template-id="about-tag" class="canva-text text-accent font-semibold uppercase tracking-widest text-sm mb-4" style="color: rgb(255, 196, 0); font-weight: 600; font-style: normal; font-size: 16px;">Sobre Mim</p>
+     <h2 data-template-id="about-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl mb-6" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Experiência e dedicação para sua segurança</h2>
+     <p data-template-id="about-text" class="canva-text text-gray-600 leading-relaxed text-base mb-6" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Sou Henrique Menares, instrutor particular de direção com anos de experiência formando motoristas confiantes e seguros. Meu método é personalizado, respeitando o ritmo de cada aluno.</p>
+     <p data-template-id="about-text-2" class="canva-text text-gray-600 leading-relaxed text-base" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Atendo desde quem está tirando a primeira habilitação até quem precisa superar o medo de dirigir. Cada aula é planejada para que você evolua com tranquilidade.</p>
+    </div>
+   </div>
+  </section><!-- SERVIÇOS -->
+  <section id="servicos" class="w-full py-24 bg-white">
+   <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <p data-template-id="services-tag" class="canva-text text-accent font-semibold uppercase tracking-widest text-sm mb-4" style="color: rgb(255, 196, 0); font-weight: 600; font-style: normal; font-size: 16px;">O que ofereço</p>
+     <h2 data-template-id="services-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Serviços</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="car" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-1" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Primeira Habilitação</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="shield" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-2" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Medo de Dirigir</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="parking-square" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-3" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Baliza</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="map" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-4" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Rodovia</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="moon" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-5" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Direção Noturna</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="alert-triangle" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-6" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Direção Defensiva</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="settings" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-7" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Aulas Personalizadas</h3>
+     </div>
+     <div class="reveal service-card bg-gray-50 rounded-2xl p-6 text-center">
+      <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="refresh-cw" class="text-accent" style="width:28px;height:28px"></i>
+      </div>
+      <h3 data-template-id="svc-8" class="canva-text text-navy font-semibold text-base" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 19px;">Reciclagem para Habilitados</h3>
+     </div>
+    </div>
+   </div>
+  </section><!-- COMO FUNCIONA -->
+  <section class="w-full py-24 bg-gray-50">
+   <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <p data-template-id="steps-tag" class="canva-text text-accent font-semibold uppercase tracking-widest text-sm mb-4" style="color: rgb(255, 196, 0); font-weight: 600; font-style: normal; font-size: 16px;">Passo a passo</p>
+     <h2 data-template-id="steps-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Como Funciona</h2>
+    </div>
+    <div class="space-y-8">
+     <div class="reveal flex items-center gap-6">
+      <div class="timeline-dot bg-accent rounded-full flex items-center justify-center text-dark font-extrabold text-lg shrink-0">
+       1
+      </div>
+      <p data-template-id="step-1" class="canva-text text-navy font-semibold text-lg" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Contato — Fale comigo por WhatsApp ou formulário</p>
+     </div>
+     <div class="reveal flex items-center gap-6">
+      <div class="timeline-dot bg-accent rounded-full flex items-center justify-center text-dark font-extrabold text-lg shrink-0">
+       2
+      </div>
+      <p data-template-id="step-2" class="canva-text text-navy font-semibold text-lg" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Agendamento — Escolhemos dia e horário ideal</p>
+     </div>
+     <div class="reveal flex items-center gap-6">
+      <div class="timeline-dot bg-accent rounded-full flex items-center justify-center text-dark font-extrabold text-lg shrink-0">
+       3
+      </div>
+      <p data-template-id="step-3" class="canva-text text-navy font-semibold text-lg" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Primeira Aula — Avaliação do seu nível</p>
+     </div>
+     <div class="reveal flex items-center gap-6">
+      <div class="timeline-dot bg-accent rounded-full flex items-center justify-center text-dark font-extrabold text-lg shrink-0">
+       4
+      </div>
+      <p data-template-id="step-4" class="canva-text text-navy font-semibold text-lg" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Treinamento — Evolução progressiva e segura</p>
+     </div>
+     <div class="reveal flex items-center gap-6">
+      <div class="timeline-dot bg-accent rounded-full flex items-center justify-center text-dark font-extrabold text-lg shrink-0">
+       5
+      </div>
+      <p data-template-id="step-5" class="canva-text text-navy font-semibold text-lg" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Confiança ao Volante — Você pronto para dirigir</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- GALERIA -->
+  <section class="w-full py-24 bg-white">
+   <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <h2 data-template-id="gallery-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Galeria</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+     <div class="reveal rounded-2xl overflow-hidden row-span-2"><img data-template-id="gallery-1" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7144174/pexels-photo-7144174.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Aluna recebendo chaves do carro após aprovação">
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden"><img data-template-id="gallery-2" class="canva-image w-full h-64 object-cover" loading="lazy" src="https://images.pexels.com/photos/7144186/pexels-photo-7144186.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Aluna sorrindo com chaves do carro">
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden"><img data-template-id="gallery-3" class="canva-image w-full h-64 object-cover" loading="lazy" src="https://images.pexels.com/photos/1392621/pexels-photo-1392621.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Mão no volante durante aula prática">
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden"><img data-template-id="gallery-4" class="canva-image w-full h-64 object-cover" loading="lazy" src="https://images.pexels.com/photos/6817008/pexels-photo-6817008.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Mulher dirigindo com confiança">
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden"><img data-template-id="gallery-5" class="canva-image w-full h-64 object-cover" loading="lazy" src="https://images.pexels.com/photos/27650723/pexels-photo-27650723.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pista de treinamento vista aérea">
+     </div>
+    </div>
+   </div>
+  </section><!-- VÍDEOS -->
+  <section class="w-full py-24 bg-gray-50">
+   <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <h2 data-template-id="videos-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Vídeos</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- ADICIONAR LINK YOUTUBE AQUI -->
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+     <div class="reveal rounded-2xl overflow-hidden aspect-video bg-navy/10 flex items-center justify-center text-gray-400">
+      <i data-lucide="play-circle" style="width:48px;height:48px"></i>
+     </div>
+    </div>
+   </div>
+  </section><!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="w-full py-24 bg-white">
+   <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <h2 data-template-id="testimonials-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">O que meus alunos dizem</h2>
+    </div>
+    <div class="relative">
+     <div id="testimonial-carousel" class="overflow-hidden">
+      <div id="testimonial-track" class="flex transition-transform duration-500">
+       <div class="w-full shrink-0 px-4">
+        <div class="bg-gray-50 rounded-3xl p-8 text-center"><img data-template-id="test-1-photo" class="canva-image w-20 h-20 rounded-full object-cover mx-auto mb-4" loading="lazy" src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Aluna satisfeita">
+         <div class="text-accent text-lg mb-2">
+          ★★★★★
+         </div>
+         <p data-template-id="test-1-text" class="canva-text text-gray-600 italic mb-4" style="color: rgb(75, 85, 99); font-weight: 400; font-style: italic; font-size: 16px;">O Henrique me ajudou a superar o medo de dirigir. Hoje dirijo com total confiança! Recomendo demais.</p>
+         <p data-template-id="test-1-name" class="canva-text text-navy font-bold" style="color: rgb(16, 42, 67); font-weight: 700; font-style: normal; font-size: 16px;">Camila Oliveira</p>
+         <p data-template-id="test-1-city" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">São Paulo, SP</p>
+        </div>
+       </div>
+       <div class="w-full shrink-0 px-4">
+        <div class="bg-gray-50 rounded-3xl p-8 text-center"><img data-template-id="test-2-photo" class="canva-image w-20 h-20 rounded-full object-cover mx-auto mb-4" loading="lazy" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Aluno aprovado">
+         <div class="text-accent text-lg mb-2">
+          ★★★★★
+         </div>
+         <p data-template-id="test-2-text" class="canva-text text-gray-600 italic mb-4" style="color: rgb(75, 85, 99); font-weight: 400; font-style: italic; font-size: 16px;">Passei de primeira na prova prática graças às aulas do Henrique. Profissional excelente e muito paciente.</p>
+         <p data-template-id="test-2-name" class="canva-text text-navy font-bold" style="color: rgb(16, 42, 67); font-weight: 700; font-style: normal; font-size: 16px;">Lucas Santos</p>
+         <p data-template-id="test-2-city" class="canva-text text-gray-400 text-sm" style="color: rgb(156, 163, 175); font-weight: 400; font-style: normal; font-size: 16px;">Guarulhos, SP</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="flex justify-center gap-4 mt-8"><button id="prev-test" class="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center hover:bg-accent hover:text-dark transition" aria-label="Anterior"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button id="next-test" class="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center hover:bg-accent hover:text-dark transition" aria-label="Próximo"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+    </div>
+   </div>
+  </section><!-- FAQ -->
+  <section id="faq" class="w-full py-24 bg-gray-50">
+   <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+     <h2 data-template-id="faq-title" class="canva-text text-navy font-extrabold text-3xl md:text-4xl" style="font-family: Poppins; color: rgb(16, 42, 67); font-weight: 800; font-style: normal; font-size: 24px;">Perguntas Frequentes</h2>
+    </div>
+    <div class="space-y-4">
+     <div class="reveal bg-white rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-q1" class="canva-text text-navy font-semibold" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Quanto tempo dura cada aula?</span> <i data-lucide="chevron-down" class="text-accent shrink-0 transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-a1" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Cada aula tem duração de 50 minutos, podendo ser estendida conforme a necessidade do aluno.</p>
+      </div>
+     </div>
+     <div class="reveal bg-white rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-q2" class="canva-text text-navy font-semibold" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Posso agendar aulas aos finais de semana?</span> <i data-lucide="chevron-down" class="text-accent shrink-0 transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-a2" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Sim! Atendo de segunda a sábado, com horários flexíveis para se adaptar à sua rotina.</p>
+      </div>
+     </div>
+     <div class="reveal bg-white rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-q3" class="canva-text text-navy font-semibold" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Você fornece o veículo para as aulas?</span> <i data-lucide="chevron-down" class="text-accent shrink-0 transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-a3" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Sim, as aulas são realizadas em veículo próprio, equipado com duplo comando para sua total segurança.</p>
+      </div>
+     </div>
+     <div class="reveal bg-white rounded-2xl overflow-hidden"><button class="faq-btn w-full text-left p-6 flex justify-between items-center" aria-expanded="false"> <span data-template-id="faq-q4" class="canva-text text-navy font-semibold" style="color: rgb(16, 42, 67); font-weight: 600; font-style: normal; font-size: 16px;">Atende qual região?</span> <i data-lucide="chevron-down" class="text-accent shrink-0 transition-transform" style="width:20px;height:20px"></i> </button>
+      <div class="faq-content px-6 pb-6">
+       <p data-template-id="faq-a4" class="canva-text text-gray-600" style="color: rgb(75, 85, 99); font-weight: 400; font-style: normal; font-size: 16px;">Atendo São Paulo e região metropolitana. Entre em contato para confirmar disponibilidade na sua área.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- CONTATO / FORMULÁRIO -->
+  <section id="contato" class="w-full py-24 bg-navy">
+   <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+    <div class="reveal">
+     <h2 data-template-id="contact-title" class="canva-text text-white font-extrabold text-3xl md:text-4xl mb-6" style="font-family: Poppins; color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 24px;">Vamos conversar?</h2>
+     <p data-template-id="contact-desc" class="canva-text text-white/70 mb-8" style="color: rgba(255, 255, 255, 0.7); font-weight: 400; font-style: normal; font-size: 16px;">Entre em contato e agende sua primeira aula. Estou pronto para te ajudar a conquistar sua liberdade ao volante.</p>
+     <div class="space-y-4"><!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-white/80 hover:text-accent transition"><i data-lucide="message-circle" style="width:20px;height:20px"></i><span data-template-id="contact-whatsapp" class="canva-text" style="color: rgba(255, 255, 255, 0.8); font-weight: 400; font-style: normal; font-size: 16px;">(11) 99999-9999</span></a> <!-- ALTERAR INSTAGRAM --> <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-white/80 hover:text-accent transition"><i data-lucide="instagram" style="width:20px;height:20px"></i><span data-template-id="contact-instagram" class="canva-text" style="color: rgba(255, 255, 255, 0.8); font-weight: 400; font-style: normal; font-size: 16px;">@henriquemenares</span></a> <!-- ALTERAR TELEFONE --> <a href="tel:+5511999999999" class="flex items-center gap-3 text-white/80 hover:text-accent transition"><i data-lucide="phone" style="width:20px;height:20px"></i><span data-template-id="contact-phone" class="canva-text" style="color: rgba(255, 255, 255, 0.8); font-weight: 400; font-style: normal; font-size: 16px;">(11) 99999-9999</span></a> <!-- ALTERAR E-MAIL --> <a href="mailto:contato@exemplo.com" class="flex items-center gap-3 text-white/80 hover:text-accent transition"><i data-lucide="mail" style="width:20px;height:20px"></i><span data-template-id="contact-email" class="canva-text" style="color: rgba(255, 255, 255, 0.8); font-weight: 400; font-style: normal; font-size: 16px;">contato@henriquemenares.com.br</span></a>
+     </div>
+    </div>
+    <div class="reveal">
+     <form id="contact-form" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 space-y-5"><label for="name" class="sr-only">Nome</label> <input id="name" type="text" data-template-id="form-name" class="canva-input w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:border-accent transition" placeholder="Seu nome" style="font-weight: 400; font-style: normal; font-size: 16px;"> <label for="phone" class="sr-only">Telefone</label> <input id="phone" type="tel" data-template-id="form-phone" class="canva-input w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:border-accent transition" placeholder="Seu telefone" style="font-weight: 400; font-style: normal; font-size: 16px;"> <label for="city" class="sr-only">Cidade</label> <input id="city" type="text" data-template-id="form-city" class="canva-input w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:border-accent transition" placeholder="Sua cidade" style="font-weight: 400; font-style: normal; font-size: 16px;"> <label for="message" class="sr-only">Mensagem</label> <textarea id="message" rows="4" data-template-id="form-message" class="canva-input w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/50 focus:outline-none focus:border-accent transition resize-none" style="font-weight: 400; font-style: normal; font-size: 16px;">Sua mensagem</textarea> <button type="submit" data-template-id="form-btn" class="canva-button w-full bg-accent text-dark py-4 rounded-xl font-bold text-base hover:bg-yellow-300 transition" style="background: rgb(255, 196, 0); color: rgb(17, 17, 17); font-weight: 700; font-style: normal; font-size: 16px;">Solicitar Aula</button>
+      <p id="form-success" class="text-green-400 text-center font-medium hidden">Mensagem enviada com sucesso!</p>
+     </form>
+    </div>
+   </div>
+  </section><!-- MAPA -->
+  <section class="w-full"><!-- ADICIONAR MAPA AQUI - substituir src do iframe pelo link do Google Maps -->
+   <div class="w-full h-80 bg-gray-200 flex items-center justify-center text-gray-400 text-lg font-medium">
+    Google Maps — Adicionar embed aqui
+   </div>
+  </section><!-- FOOTER -->
+  <footer class="w-full bg-dark py-12">
+   <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <p data-template-id="footer-brand" class="canva-text text-white font-bold text-xl" style="font-family: Poppins; color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Henrique Menares</p>
+    <p data-template-id="footer-copy" class="canva-text text-white/50 text-sm text-center" style="color: rgba(255, 255, 255, 0.5); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 Henrique Menares. Todos os direitos reservados.</p>
+   </div>
+  </footer><!-- WHATSAPP FLUTUANTE --> <!-- ALTERAR WHATSAPP --> <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="float-btn fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-400 transition" aria-label="WhatsApp">
+   <svg viewBox="0 0 24 24" fill="white" width="32" height="32">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.932 1.395 5.607L0 24l6.563-1.37A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.875 0-3.63-.51-5.133-1.395l-.368-.22-3.812.998 1.016-3.713-.24-.38A9.69 9.69 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"></path>
+   </svg></a>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('glass', 'shadow-lg', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('glass', 'shadow-lg', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Counters
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const el = e.target;
+                    const target = +el.dataset.target;
+                    let current = 0;
+                    const step = Math.ceil(target / 60);
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) { current = target; clearInterval(timer); }
+                        el.textContent = '+' + current;
+                    }, 25);
+                    counterObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+        // Testimonial carousel
+        let testIdx = 0;
+        const track = document.getElementById('testimonial-track');
+        const slides = track.children.length;
+        document.getElementById('next-test').addEventListener('click', () => {
+            testIdx = (testIdx + 1) % slides;
+            track.style.transform = `translateX(-${testIdx * 100}%)`;
+        });
+        document.getElementById('prev-test').addEventListener('click', () => {
+            testIdx = (testIdx - 1 + slides) % slides;
+            track.style.transform = `translateX(-${testIdx * 100}%)`;
+        });
+
+        // FAQ
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('[data-lucide]');
+                const open = content.classList.toggle('open');
+                btn.setAttribute('aria-expanded', open);
+                icon.style.transform = open ? 'rotate(180deg)' : '';
+            });
+        });
+
+        // Form
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('form-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 4000);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+
+        lucide.createIcons();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a11f89eda549f1d3',t:'MTc4MjUxMTc5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+  <script src="site-content.js"></script>
+  <script src="site-admin.js"></script>
+</body></html>
