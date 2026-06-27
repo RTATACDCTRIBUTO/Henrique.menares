@@ -169,6 +169,21 @@
       margin-top: 16px;
     }
 
+    .auth-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+    }
+
+    .auth-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
     .button-row {
       display: flex;
       gap: 10px;
@@ -330,6 +345,20 @@
           <select id="admin-site"></select>
         </label>
 
+        <div class="auth-box">
+          <p id="admin-user">Entre com o e-mail autorizado para salvar no Firestore.</p>
+          <label for="admin-login-email">
+            E-mail
+            <input id="admin-login-email" type="email" autocomplete="username">
+          </label>
+          <label for="admin-login-password">
+            Senha
+            <input id="admin-login-password" type="password" autocomplete="current-password">
+          </label>
+          <button id="admin-login" class="btn secondary" type="button">Entrar</button>
+          <button id="admin-logout" class="btn secondary" type="button" hidden>Sair</button>
+        </div>
+
         <div class="actions">
           <button id="admin-save" class="btn" type="button">Salvar e aplicar</button>
           <button id="admin-open" class="btn secondary" type="button">Abrir página</button>
@@ -420,7 +449,9 @@
       </section>
     </main>
   </div>
-
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
   <script src="site-content.js"></script>
   <script src="site-admin.js"></script>
 </body>
