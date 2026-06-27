@@ -1,21 +1,6 @@
 window.HNE_SITE_CONTENT = {
   version: 1,
   updatedAt: "",
-  firebase: {
-    enabled: true,
-    adminEmail: "contato.henriquemenares@gmail.com",
-    collection: "hne_site",
-    document: "content",
-    config: {
-      apiKey: "AIzaSyATfe4eRm_lXI-TNoa9vuYffb9DCpJf5Ec",
-      authDomain: "app-web-ea867.firebaseapp.com",
-      projectId: "app-web-ea867",
-      storageBucket: "app-web-ea867.firebasestorage.app",
-      messagingSenderId: "560433277152",
-      appId: "1:560433277152:web:775eedaa3190f60850c885",
-      measurementId: "G-R3QJ3XSF07"
-    }
-  },
   sites: {
     aularitmica: {
       label: "Aula de Violão e Rítmica",
@@ -81,15 +66,15 @@ window.HNE_SITE_CONTENT = {
         aboutText2: ""
       },
       images: {
-        heroBg: "https://images.pexels.com/photos/164821/pexels-photo-164821.jpeg?auto=compress&cs=tinysrgb&w=1920",
+        heroBg: "foto-principal.jpg",
         heroPhoto: "",
         aboutPhoto: ""
       },
       gallery: [
-        { src: "https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg?auto=compress&cs=tinysrgb&w=900", alt: "Apresentação musical ao vivo" },
-        { src: "https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=900", alt: "Show com luzes no palco" },
-        { src: "https://images.pexels.com/photos/7715347/pexels-photo-7715347.jpeg?auto=compress&cs=tinysrgb&w=900", alt: "Músico tocando violão no palco" },
-        { src: "https://images.pexels.com/photos/7715356/pexels-photo-7715356.jpeg?auto=compress&cs=tinysrgb&w=900", alt: "Violão em destaque" }
+        { src: "foto1.jpg", alt: "Foto do show 1" },
+        { src: "foto2.jpg", alt: "Foto do show 2" },
+        { src: "foto3.jpg", alt: "Foto do show 3" },
+        { src: "foto4.jpg", alt: "Foto do show 4" }
       ],
       videos: [
         "https://www.youtube.com/watch?v=uGNnLW2x2PQ",

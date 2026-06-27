@@ -4,16 +4,6 @@
   var STORAGE_KEY = "hne-site-admin-content-v1";
   var LAST_SITE_KEY = "hne-site-admin-last-site";
   var DEFAULT_CONTENT = window.HNE_SITE_CONTENT || { version: 1, sites: {} };
-  var firebaseConfig = DEFAULT_CONTENT.firebase || {};
-  var remoteContent = null;
-  var firebaseState = {
-    ready: false,
-    db: null,
-    auth: null,
-    docRef: null,
-    user: null,
-    adminReady: false
-  };
 
   var PAGE_CONFIG = {
     aularitmica: {
@@ -30,7 +20,9 @@
         heroBg: '[data-template-id="hero-bg"]',
         heroPhoto: '[data-template-id="hero-profile"]',
         aboutPhoto: '[data-template-id="about-photo"]'
-      }
+      },
+      galleryStyle: "aularitmica",
+      videoStyle: "aularitmica"
     },
     motorista: {
       files: ["indexinstru"],
@@ -46,7 +38,9 @@
         heroBg: '[data-template-id="hero-bg"]',
         heroPhoto: '[data-template-id="hero-portrait"]',
         aboutPhoto: '[data-template-id="about-photo"]'
-      }
+      },
+      galleryStyle: "motorista",
+      videoStyle: "motorista"
     },
     show: {
       files: ["indexshow"],
@@ -58,7 +52,9 @@
       },
       images: {
         heroBg: ".hero"
-      }
+      },
+      galleryStyle: "show",
+      videoStyle: "show"
     }
   };
 
@@ -91,22 +87,13 @@
   }
 
   function getContent() {
-    return merge(merge(DEFAULT_CONTENT, getStoredContent()), remoteContent);
+    return merge(DEFAULT_CONTENT, getStoredContent());
   }
 
-  function saveLocalContent(content) {
+  function saveContent(content) {
     var next = merge(DEFAULT_CONTENT, content);
     next.updatedAt = new Date().toISOString();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    return next;
-  }
-
-  async function saveContent(content) {
-    var next = saveLocalContent(content);
-    if (firebaseState.docRef) {
-      await firebaseState.docRef.set(next);
-      remoteContent = next;
-    }
     return next;
   }
 
@@ -347,50 +334,6 @@
     return false;
   }
 
-  function getFirebasePath() {
-    return {
-      collection: firebaseConfig.collection || "hne_site",
-      document: firebaseConfig.document || "content"
-    };
-  }
-
-  function setupFirebase() {
-    if (!firebaseConfig.enabled || !firebaseConfig.config || !window.firebase) return false;
-    try {
-      if (!window.firebase.apps.length) {
-        window.firebase.initializeApp(firebaseConfig.config);
-      }
-      firebaseState.auth = window.firebase.auth();
-      firebaseState.db = window.firebase.firestore();
-      var path = getFirebasePath();
-      firebaseState.docRef = firebaseState.db.collection(path.collection).doc(path.document);
-      firebaseState.ready = true;
-      return true;
-    } catch (error) {
-      console.warn("Firebase indisponível:", error);
-      return false;
-    }
-  }
-
-  function watchRemoteContent(onChange) {
-    if (!firebaseState.docRef) return;
-    firebaseState.docRef.onSnapshot(function (snapshot) {
-      if (snapshot.exists) {
-        remoteContent = snapshot.data();
-        saveLocalContent(remoteContent);
-        if (typeof onChange === "function") onChange(remoteContent);
-      }
-      applyPublicPage();
-    }, function (error) {
-      console.warn("Não foi possível ler o Firestore:", error);
-    });
-  }
-
-  function userIsAdmin(user) {
-    var allowed = String(firebaseConfig.adminEmail || "").toLowerCase();
-    return !!(user && user.email && user.email.toLowerCase() === allowed);
-  }
-
   function initAdmin() {
     var root = document.querySelector("[data-hne-admin]");
     if (!root) return;
@@ -419,12 +362,7 @@
       saveFile: document.getElementById("admin-save-file"),
       reset: document.getElementById("admin-reset"),
       addPhoto: document.getElementById("admin-add-photo"),
-      addVideo: document.getElementById("admin-add-video"),
-      loginEmail: document.getElementById("admin-login-email"),
-      loginPassword: document.getElementById("admin-login-password"),
-      login: document.getElementById("admin-login"),
-      logout: document.getElementById("admin-logout"),
-      user: document.getElementById("admin-user")
+      addVideo: document.getElementById("admin-add-video")
     };
 
     Object.keys(content.sites).forEach(function (siteKey) {
@@ -433,8 +371,6 @@
       option.textContent = content.sites[siteKey].label || siteKey;
       elements.site.appendChild(option);
     });
-
-    elements.loginEmail.value = firebaseConfig.adminEmail || "";
 
     function siteConfig() {
       return PAGE_CONFIG[currentSiteKey] || {};
@@ -447,38 +383,6 @@
     function setStatus(message) {
       elements.status.textContent = message;
       elements.status.dataset.state = message ? "active" : "";
-    }
-
-    function setWriteEnabled(enabled) {
-      [elements.save, elements.reset, elements.addPhoto, elements.addVideo].forEach(function (button) {
-        if (button) button.disabled = !enabled;
-      });
-      [elements.photoUrl, elements.videoUrl].forEach(function (field) {
-        if (field) field.disabled = !enabled;
-      });
-    }
-
-    function updateAuthUi(user) {
-      firebaseState.user = user || null;
-      var allowed = userIsAdmin(user);
-      if (!firebaseState.ready) {
-        elements.user.textContent = "Firebase não carregou. As alterações ficam apenas neste navegador.";
-        setWriteEnabled(true);
-        return;
-      }
-      if (allowed) {
-        elements.user.textContent = "Logado como " + user.email + ".";
-        elements.login.hidden = true;
-        elements.logout.hidden = false;
-        elements.loginPassword.hidden = true;
-        setWriteEnabled(true);
-      } else {
-        elements.user.textContent = user ? "E-mail sem permissão: " + user.email : "Entre com " + (firebaseConfig.adminEmail || "o e-mail autorizado") + " para salvar online.";
-        elements.login.hidden = false;
-        elements.logout.hidden = true;
-        elements.loginPassword.hidden = false;
-        setWriteEnabled(false);
-      }
     }
 
     function setGroupVisibility() {
@@ -505,7 +409,6 @@
     }
 
     function fillForm() {
-      content = getContent();
       var site = siteData();
       elements.site.value = currentSiteKey;
       elements.heroTitle.value = (site.fields && site.fields.heroTitle) || "";
@@ -520,6 +423,7 @@
       setGroupVisibility();
       renderPhotos();
       renderVideosList();
+      setStatus("");
     }
 
     function collectForm() {
@@ -540,62 +444,37 @@
       return site;
     }
 
-    async function saveCurrentSite() {
-      if (firebaseState.ready && !userIsAdmin(firebaseState.user)) {
-        setStatus("Entre com o e-mail autorizado antes de salvar.");
-        return;
-      }
+    function saveCurrentSite() {
       content.sites[currentSiteKey] = collectForm();
-      content = await saveContent(content);
+      content = saveContent(content);
       localStorage.setItem(LAST_SITE_KEY, currentSiteKey);
-      setStatus(firebaseState.ready ? "Alterações salvas no Firestore." : "Alterações salvas neste navegador.");
+      setStatus("Alterações salvas.");
     }
 
     elements.site.addEventListener("change", function () {
       currentSiteKey = elements.site.value;
       localStorage.setItem(LAST_SITE_KEY, currentSiteKey);
       fillForm();
-      setStatus("");
-    });
-
-    elements.login.addEventListener("click", async function () {
-      if (!firebaseState.auth) {
-        setStatus("Firebase Auth não carregou.");
-        return;
-      }
-      try {
-        await firebaseState.auth.signInWithEmailAndPassword(elements.loginEmail.value.trim(), elements.loginPassword.value);
-        elements.loginPassword.value = "";
-        setStatus("Login feito.");
-      } catch (error) {
-        setStatus("Não foi possível entrar. Confira se o usuário existe no Firebase Authentication.");
-      }
-    });
-
-    elements.logout.addEventListener("click", async function () {
-      if (firebaseState.auth) await firebaseState.auth.signOut();
-      setStatus("Sessão encerrada.");
     });
 
     elements.save.addEventListener("click", function () {
-      saveCurrentSite().catch(function () {
-        setStatus("Erro ao salvar no Firestore.");
-      });
+      saveCurrentSite();
     });
 
     elements.open.addEventListener("click", function () {
+      saveCurrentSite();
       window.open(siteData().page, "_blank", "noopener");
     });
 
     elements.download.addEventListener("click", function () {
-      content.sites[currentSiteKey] = collectForm();
+      saveCurrentSite();
       downloadContentFile(content);
       setStatus("Arquivo gerado.");
     });
 
     elements.saveFile.addEventListener("click", async function () {
       try {
-        content.sites[currentSiteKey] = collectForm();
+        saveCurrentSite();
         await saveContentFile(content);
         setStatus("Arquivo pronto.");
       } catch (error) {
@@ -606,8 +485,9 @@
     elements.reset.addEventListener("click", function () {
       if (!confirm("Restaurar o conteúdo original desta página?")) return;
       content.sites[currentSiteKey] = copy(DEFAULT_CONTENT.sites[currentSiteKey]);
+      content = saveContent(content);
       fillForm();
-      setStatus("Página restaurada. Clique em salvar para publicar.");
+      setStatus("Página restaurada.");
     });
 
     elements.addPhoto.addEventListener("click", function () {
@@ -654,24 +534,12 @@
       renderVideosList();
     });
 
-    if (firebaseState.auth) {
-      firebaseState.auth.onAuthStateChanged(updateAuthUi);
-    } else {
-      updateAuthUi(null);
-    }
-
     fillForm();
-    firebaseState.adminReady = true;
-    watchRemoteContent(fillForm);
   }
 
   function boot() {
-    setupFirebase();
     initAdmin();
     applyPublicPage();
-    if (!document.querySelector("[data-hne-admin]")) {
-      watchRemoteContent(applyPublicPage);
-    }
   }
 
   if (document.readyState === "loading") {
